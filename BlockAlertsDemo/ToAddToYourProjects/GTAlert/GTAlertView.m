@@ -8,8 +8,8 @@
 
 
 #import "GTAlertView.h"
-#import "BlockBackground.h"
 #import "BlockUI.h"
+#import "BlurBackground.h"
 
 @implementation GTAlertView
 
@@ -61,55 +61,8 @@ static UIFont *buttonFont = nil;
     [alert release];
 }
 
-
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 #pragma mark - NSObject
-
-- (void)addComponents:(CGRect)frame {
-    if (_title)
-    {
-        CGSize size = [_title sizeWithFont:titleFont
-                         constrainedToSize:CGSizeMake(frame.size.width-kAlertViewBorder*2, 1000)
-                             lineBreakMode:NSLineBreakByWordWrapping];
-        
-        UILabel *labelView = [[UILabel alloc] initWithFrame:CGRectMake(kAlertViewBorder, _height, frame.size.width-kAlertViewBorder*2, size.height)];
-        labelView.font = titleFont;
-        labelView.numberOfLines = 0;
-        labelView.lineBreakMode = NSLineBreakByWordWrapping;
-        labelView.textColor = kAlertViewTitleTextColor;
-        labelView.backgroundColor = [UIColor clearColor];
-        labelView.textAlignment = NSTextAlignmentCenter;
-        labelView.shadowColor = kAlertViewTitleShadowColor;
-        labelView.shadowOffset = kAlertViewTitleShadowOffset;
-        labelView.text = _title;
-        [_view addSubview:labelView];
-        [labelView release];
-        
-        _height += size.height + kAlertViewBorder;
-    }
-    
-    if (_message)
-    {
-        CGSize size = [_message sizeWithFont:messageFont
-                           constrainedToSize:CGSizeMake(frame.size.width-kAlertViewBorder*2, 1000)
-                               lineBreakMode:NSLineBreakByWordWrapping];
-        
-        UILabel *labelView = [[UILabel alloc] initWithFrame:CGRectMake(kAlertViewBorder, _height, frame.size.width-kAlertViewBorder*2, size.height)];
-        labelView.font = messageFont;
-        labelView.numberOfLines = 0;
-        labelView.lineBreakMode = NSLineBreakByWordWrapping;
-        labelView.textColor = kAlertViewMessageTextColor;
-        labelView.backgroundColor = [UIColor clearColor];
-        labelView.textAlignment = NSTextAlignmentCenter;
-        labelView.shadowColor = kAlertViewMessageShadowColor;
-        labelView.shadowOffset = kAlertViewMessageShadowOffset;
-        labelView.text = _message;
-        [_view addSubview:labelView];
-        [labelView release];
-        
-        _height += size.height + kAlertViewBorder;
-    }
-}
 
 - (void)setupDisplay
 {
@@ -117,7 +70,7 @@ static UIFont *buttonFont = nil;
         [obj removeFromSuperview];
     }];
     
-    UIWindow *parentView = [BlockBackground sharedInstance];
+    UIWindow *parentView = [BlurBackground sharedInstance];
     CGRect frame = parentView.bounds;
     frame.origin.x = floorf((frame.size.width - background.size.width) * 0.5);
     frame.size.width = background.size.width;
@@ -179,34 +132,6 @@ static UIFont *buttonFont = nil;
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 #pragma mark - Public
 
-- (void)addButtonWithTitle:(NSString *)title color:(NSString*)color block:(void (^)())block
-{
-    [_blocks addObject:[NSArray arrayWithObjects:
-                        block ? [[block copy] autorelease] : [NSNull null],
-                        title,
-                        color,
-                        nil]];
-}
-
-- (void)addButtonWithTitle:(NSString *)title block:(void (^)())block
-{
-    [self addButtonWithTitle:title color:@"gray" block:block];
-}
-
-- (void)setCancelButtonWithTitle:(NSString *)title block:(void (^)())block
-{
-    [self addButtonWithTitle:title color:@"black" block:block];
-}
-
-- (void)setDestructiveButtonWithTitle:(NSString *)title block:(void (^)())block
-{
-    [self addButtonWithTitle:title color:@"red" block:block];
-}
-
-- (void)addButtonWithTitle:(NSString *)title imageIdentifier:(NSString*)identifier block:(void (^)())block {
-    [self addButtonWithTitle:title color:identifier block:block];
-}
-
 - (void)show
 {
     _shown = YES;
@@ -219,20 +144,20 @@ static UIFont *buttonFont = nil;
         NSString *title = [block objectAtIndex:1];
         NSString *color = [block objectAtIndex:2];
         
-        UIImage *image = [UIImage imageNamed:[NSString stringWithFormat:@"alert-%@-button.png", color]];
+        UIImage *image = nil;//[UIImage imageNamed:[NSString stringWithFormat:@"alert-%@-button.png", color]];
         image = [image stretchableImageWithLeftCapWidth:(int)(image.size.width+1)>>1 topCapHeight:0];
         
         UIImage *highlightedImage = [UIImage imageNamed:[NSString stringWithFormat:@"alert-%@-button-highlighted.png", color]];
         
         highlightedImage = [highlightedImage stretchableImageWithLeftCapWidth:(int)(highlightedImage.size.width+1)>>1 topCapHeight:0];
         
-        CGFloat maxHalfWidth = floorf((_view.bounds.size.width-kAlertViewBorder*3)*0.5);
-        CGFloat width = _view.bounds.size.width-kAlertViewBorder*2;
-        CGFloat xOffset = kAlertViewBorder;
+		CGFloat maxHalfWidth = floorf(_view.bounds.size.width*0.5);
+        CGFloat width = _view.bounds.size.width;
+        CGFloat xOffset = 0;
         if (isSecondButton)
         {
             width = maxHalfWidth;
-            xOffset = width + kAlertViewBorder * 2;
+            xOffset = width;
             isSecondButton = NO;
         }
         else if (i + 1 < _blocks.count)
@@ -242,10 +167,10 @@ static UIFont *buttonFont = nil;
             CGSize size = [title sizeWithFont:buttonFont
                                   minFontSize:10
                                actualFontSize:nil
-                                     forWidth:_view.bounds.size.width-kAlertViewBorder*2
+                                     forWidth:_view.bounds.size.width
                                 lineBreakMode:NSLineBreakByClipping];
             
-            if (size.width < maxHalfWidth - kAlertViewBorder)
+            if (size.width < maxHalfWidth)
             {
                 // It might fit. Check the next Button
                 NSArray *block2 = [_blocks objectAtIndex:i+1];
@@ -253,10 +178,10 @@ static UIFont *buttonFont = nil;
                 size = [title2 sizeWithFont:buttonFont
                                 minFontSize:10
                              actualFontSize:nil
-                                   forWidth:_view.bounds.size.width-kAlertViewBorder*2
+                                   forWidth:_view.bounds.size.width
                               lineBreakMode:NSLineBreakByClipping];
                 
-                if (size.width < maxHalfWidth - kAlertViewBorder)
+                if (size.width < maxHalfWidth)
                 {
                     // They'll fit!
                     isSecondButton = YES;  // For the next iteration
@@ -270,13 +195,13 @@ static UIFont *buttonFont = nil;
             CGSize size = [title sizeWithFont:buttonFont
                                   minFontSize:10
                                actualFontSize:nil
-                                     forWidth:_view.bounds.size.width-kAlertViewBorder*2
+                                     forWidth:_view.bounds.size.width
                                 lineBreakMode:NSLineBreakByClipping];
             
             size.width = MAX(size.width, 80);
-            if (size.width + 2 * kAlertViewBorder < width)
+            if (size.width < width)
             {
-                width = size.width + 2 * kAlertViewBorder;
+                width = size.width;
                 xOffset = floorf((_view.bounds.size.width - width) * 0.5);
             }
         }
@@ -300,12 +225,37 @@ static UIFont *buttonFont = nil;
         button.backgroundColor = [UIColor clearColor];
         button.tag = i+1;
         
-        [button setBackgroundImage:image forState:UIControlStateNormal];
-        if (highlightedImage)
-        {
-            [button setBackgroundImage:highlightedImage forState:UIControlStateHighlighted];
-        }
-        [button setTitleColor:kAlertViewButtonTextColor forState:UIControlStateNormal];
+		
+		UIColor *whiteColor = [UIColor colorWithRed:0.5 green:0.5 blue:0.5 alpha:0.3];
+		button.layer.borderColor = whiteColor.CGColor;
+		button.layer.borderWidth = 1.f / [[UIScreen mainScreen] scale];
+		
+		if([color isEqualToString:@"red"])
+		{
+			[button setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
+			[button setTitleColor:[UIColor colorWithRed:0.5 green:0.0 blue:0.0 alpha:1.0] forState:UIControlStateHighlighted];
+		}
+		else if([color isEqualToString:@"green"])
+		{
+			[button setTitleColor:[UIColor greenColor] forState:UIControlStateNormal];
+			[button setTitleColor:[UIColor colorWithRed:0.0 green:0.5 blue:0.0 alpha:1.0] forState:UIControlStateHighlighted];
+		}
+		else if([color isEqualToString:@"gray"])
+		{
+			[button setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
+			[button setTitleColor:[UIColor colorWithRed:0.2 green:0.2 blue:0.2 alpha:1.0] forState:UIControlStateHighlighted];
+		}
+		else if([color isEqualToString:@"yellow"])
+		{
+			[button setTitleColor:[UIColor yellowColor] forState:UIControlStateNormal];
+			[button setTitleColor:[UIColor colorWithRed:0.5 green:0.5 blue:0.0 alpha:1.0] forState:UIControlStateHighlighted];
+		}
+		else
+		{
+			[button setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+			[button setTitleColor:[UIColor grayColor] forState:UIControlStateHighlighted];
+		}
+        
         [button setTitleShadowColor:kAlertViewButtonShadowColor forState:UIControlStateNormal];
         [button setTitle:title forState:UIControlStateNormal];
         button.accessibilityLabel = title;
@@ -315,7 +265,7 @@ static UIFont *buttonFont = nil;
         [_view addSubview:button];
         
         if (!isSecondButton)
-            _height += kAlertButtonHeight + kAlertViewBorder;
+            _height += kAlertButtonHeight;
         
         index++;
     }
@@ -344,11 +294,14 @@ static UIFont *buttonFont = nil;
     
     UIImageView *modalBackground = [[UIImageView alloc] initWithFrame:_view.bounds];
     
-    if (UIInterfaceOrientationIsLandscape([[UIApplication sharedApplication] statusBarOrientation]))
-        modalBackground.image = backgroundlandscape;
-    else
-        modalBackground.image = background;
-    
+	UIColor *whiteColor = [UIColor colorWithRed:0.5 green:0.5 blue:0.5 alpha:1.000];
+	
+	_view.backgroundColor = [UIColor colorWithWhite:0.1 alpha:1.0f];
+	_view.layer.borderColor = whiteColor.CGColor;
+	_view.layer.borderWidth = 1.f;
+	_view.layer.cornerRadius = 10.f;
+	_view.clipsToBounds = YES;
+	
     modalBackground.contentMode = UIViewContentModeScaleToFill;
     modalBackground.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     [_view insertSubview:modalBackground atIndex:0];
@@ -356,16 +309,16 @@ static UIFont *buttonFont = nil;
     
     if (_backgroundImage)
     {
-        [BlockBackground sharedInstance].backgroundImage = _backgroundImage;
+        [BlurBackground sharedInstance].backgroundImage = _backgroundImage;
         [_backgroundImage release];
         _backgroundImage = nil;
     }
     
-    [BlockBackground sharedInstance].vignetteBackground = _vignetteBackground;
-    [[BlockBackground sharedInstance] addToMainWindow:_view];
+    [BlurBackground sharedInstance].vignetteBackground = _vignetteBackground;
+    [[BlurBackground sharedInstance] addToMainWindow:_view];
     
     __block CGPoint center = _view.center;
-    center.y = floorf([BlockBackground sharedInstance].bounds.size.height * 0.5) + kAlertViewBounce;
+    center.y = floorf([BlurBackground sharedInstance].bounds.size.height * 0.5) + kAlertViewBounce;
     
     _cancelBounce = NO;
     
@@ -373,7 +326,7 @@ static UIFont *buttonFont = nil;
                           delay:0.0
                         options:UIViewAnimationOptionCurveEaseOut
                      animations:^{
-                         [BlockBackground sharedInstance].alpha = 1.0f;
+                         [BlurBackground sharedInstance].alpha = 1.0f;
                          _view.center = center;
                      }
                      completion:^(BOOL finished) {
@@ -427,10 +380,10 @@ static UIFont *buttonFont = nil;
                                                   CGRect frame = _view.frame;
                                                   frame.origin.y = -frame.size.height;
                                                   _view.frame = frame;
-                                                  [[BlockBackground sharedInstance] reduceAlphaIfEmpty];
+                                                  [[BlurBackground sharedInstance] reduceAlphaIfEmpty];
                                               }
                                               completion:^(BOOL finished) {
-                                                  [[BlockBackground sharedInstance] removeView:_view];
+                                                  [[BlurBackground sharedInstance] removeView:_view];
                                                   [_view release]; _view = nil;
                                                   [self autorelease];
                                               }];
@@ -438,20 +391,10 @@ static UIFont *buttonFont = nil;
     }
     else
     {
-        [[BlockBackground sharedInstance] removeView:_view];
+        [[BlurBackground sharedInstance] removeView:_view];
         [_view release]; _view = nil;
         [self autorelease];
     }
-}
-
-///////////////////////////////////////////////////////////////////////////////////////////////////
-#pragma mark - Action
-
-- (void)buttonClicked:(id)sender
-{
-    /* Run the button's block */
-    int buttonIndex = [(UIButton *)sender tag] - 1;
-    [self dismissWithClickedButtonIndex:buttonIndex animated:YES];
 }
 
 @end

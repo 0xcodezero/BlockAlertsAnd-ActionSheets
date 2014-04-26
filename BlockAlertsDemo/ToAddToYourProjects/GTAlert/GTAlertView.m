@@ -10,6 +10,8 @@
 #import "GTAlertView.h"
 #import "BlockUI.h"
 #import "BlurBackground.h"
+#import "UIColor+GTAlert.h"
+#import "BlockAlertView.h"
 
 @implementation GTAlertView
 
@@ -232,23 +234,23 @@ static UIFont *buttonFont = nil;
 		
 		if([color isEqualToString:@"red"])
 		{
-			[button setTitleColor:[UIColor redColor] forState:UIControlStateNormal];
-			[button setTitleColor:[UIColor colorWithRed:0.5 green:0.0 blue:0.0 alpha:1.0] forState:UIControlStateHighlighted];
+			[button setTitleColor:[UIColor bb_dangerColorV3] forState:UIControlStateNormal];
+			[button setTitleColor:[UIColor bb_dangerColorV2] forState:UIControlStateHighlighted];
 		}
 		else if([color isEqualToString:@"green"])
 		{
-			[button setTitleColor:[UIColor greenColor] forState:UIControlStateNormal];
-			[button setTitleColor:[UIColor colorWithRed:0.0 green:0.5 blue:0.0 alpha:1.0] forState:UIControlStateHighlighted];
+			[button setTitleColor:[UIColor bb_infoColorV3] forState:UIControlStateNormal];
+			[button setTitleColor:[UIColor bb_infoColorV2] forState:UIControlStateHighlighted];
 		}
 		else if([color isEqualToString:@"gray"])
 		{
-			[button setTitleColor:[UIColor grayColor] forState:UIControlStateNormal];
-			[button setTitleColor:[UIColor colorWithRed:0.2 green:0.2 blue:0.2 alpha:1.0] forState:UIControlStateHighlighted];
+			[button setTitleColor:[UIColor bb_grayBButtonColor] forState:UIControlStateNormal];
+			[button setTitleColor:[UIColor darkGrayColor] forState:UIControlStateHighlighted];
 		}
 		else if([color isEqualToString:@"yellow"])
 		{
-			[button setTitleColor:[UIColor yellowColor] forState:UIControlStateNormal];
-			[button setTitleColor:[UIColor colorWithRed:0.5 green:0.5 blue:0.0 alpha:1.0] forState:UIControlStateHighlighted];
+			[button setTitleColor:[UIColor bb_warningColorV3] forState:UIControlStateNormal];
+			[button setTitleColor:[UIColor bb_warningColorV2] forState:UIControlStateHighlighted];
 		}
 		else
 		{

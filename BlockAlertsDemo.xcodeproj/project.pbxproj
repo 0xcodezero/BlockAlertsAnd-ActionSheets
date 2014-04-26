@@ -12,6 +12,7 @@
 		7B08AA63190BF02900892284 /* BlurBackground.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B08AA61190BF02900892284 /* BlurBackground.m */; };
 		7B21D72E190C27B6004079CB /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B21D72D190C27B6004079CB /* Accelerate.framework */; };
 		7B21D730190C27F5004079CB /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B21D72F190C27F5004079CB /* QuartzCore.framework */; };
+		7B21D733190C5483004079CB /* UIColor+GTAlert.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B21D732190C5483004079CB /* UIColor+GTAlert.m */; };
 		B5422F0B1705EB6200CF13D7 /* BlockTableAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = B5422F0A1705EB6200CF13D7 /* BlockTableAlertView.m */; };
 		B583D771175E3C31002A35C0 /* alert-green-button.png in Resources */ = {isa = PBXBuildFile; fileRef = B583D76F175E3C31002A35C0 /* alert-green-button.png */; };
 		B583D772175E3C31002A35C0 /* alert-green-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B583D770175E3C31002A35C0 /* alert-green-button@2x.png */; };
@@ -67,6 +68,8 @@
 		7B08AA62190BF02900892284 /* BlurBackground.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlurBackground.h; sourceTree = "<group>"; };
 		7B21D72D190C27B6004079CB /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		7B21D72F190C27F5004079CB /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		7B21D731190C5483004079CB /* UIColor+GTAlert.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIColor+GTAlert.h"; sourceTree = "<group>"; };
+		7B21D732190C5483004079CB /* UIColor+GTAlert.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIColor+GTAlert.m"; sourceTree = "<group>"; };
 		B5422F091705EB6200CF13D7 /* BlockTableAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlockTableAlertView.h; sourceTree = "<group>"; };
 		B5422F0A1705EB6200CF13D7 /* BlockTableAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlockTableAlertView.m; sourceTree = "<group>"; };
 		B583D76F175E3C31002A35C0 /* alert-green-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "alert-green-button.png"; sourceTree = "<group>"; };
@@ -148,6 +151,8 @@
 				7B08AA61190BF02900892284 /* BlurBackground.m */,
 				7B08AA5B190BB62C00892284 /* GTAlertView.h */,
 				7B08AA5C190BB62C00892284 /* GTAlertView.m */,
+				7B21D731190C5483004079CB /* UIColor+GTAlert.h */,
+				7B21D732190C5483004079CB /* UIColor+GTAlert.m */,
 			);
 			path = GTAlert;
 			sourceTree = "<group>";
@@ -389,6 +394,7 @@
 				EC9016AB14BB629F00EF52E1 /* main.m in Sources */,
 				EC9016AF14BB629F00EF52E1 /* BlockAlertsDemoAppDelegate.m in Sources */,
 				7B08AA5D190BB62C00892284 /* GTAlertView.m in Sources */,
+				7B21D733190C5483004079CB /* UIColor+GTAlert.m in Sources */,
 				EC9016B214BB629F00EF52E1 /* BlockAlertsDemoViewController.m in Sources */,
 				ECFC5EFE14EB1DA4004BFD45 /* BlockActionSheet.m in Sources */,
 				ECFC5EFF14EB1DA4004BFD45 /* BlockAlertView.m in Sources */,

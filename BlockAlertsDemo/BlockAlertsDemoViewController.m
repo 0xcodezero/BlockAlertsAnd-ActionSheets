@@ -25,7 +25,7 @@
 
 - (IBAction)showAlert:(id)sender
 {
-    BlockAlertView *alert = [BlockAlertView alertWithTitle:@"Alert Title" message:@"This is a very long message, designed just to show you how smart this class is"];
+    GTAlertView *alert = [GTAlertView alertWithTitle:@"Alert Title" message:@"This is a very long message, designed just to show you how smart this class is"];
     
     [alert setCancelButtonWithTitle:@"Cancel" block:nil];
     [alert setDestructiveButtonWithTitle:@"Kill!" block:nil];

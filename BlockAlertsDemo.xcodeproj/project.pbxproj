@@ -8,7 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		7B08AA59190BB27A00892284 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 7B08AA58190BB27A00892284 /* Default-568h@2x.png */; };
-		7BE2686E190B1A090084AC19 /* GTAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7BE2686D190B1A090084AC19 /* GTAlertView.m */; };
+		7B08AA5D190BB62C00892284 /* GTAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B08AA5C190BB62C00892284 /* GTAlertView.m */; };
+		7B08AA63190BF02900892284 /* BlurBackground.m in Sources */ = {isa = PBXBuildFile; fileRef = 7B08AA61190BF02900892284 /* BlurBackground.m */; };
+		7B21D72E190C27B6004079CB /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B21D72D190C27B6004079CB /* Accelerate.framework */; };
+		7B21D730190C27F5004079CB /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7B21D72F190C27F5004079CB /* QuartzCore.framework */; };
 		B5422F0B1705EB6200CF13D7 /* BlockTableAlertView.m in Sources */ = {isa = PBXBuildFile; fileRef = B5422F0A1705EB6200CF13D7 /* BlockTableAlertView.m */; };
 		B583D771175E3C31002A35C0 /* alert-green-button.png in Resources */ = {isa = PBXBuildFile; fileRef = B583D76F175E3C31002A35C0 /* alert-green-button.png */; };
 		B583D772175E3C31002A35C0 /* alert-green-button@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = B583D770175E3C31002A35C0 /* alert-green-button@2x.png */; };
@@ -58,8 +61,12 @@
 
 /* Begin PBXFileReference section */
 		7B08AA58190BB27A00892284 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		7BE2686C190B1A090084AC19 /* GTAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTAlertView.h; sourceTree = "<group>"; };
-		7BE2686D190B1A090084AC19 /* GTAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTAlertView.m; sourceTree = "<group>"; };
+		7B08AA5B190BB62C00892284 /* GTAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GTAlertView.h; sourceTree = "<group>"; };
+		7B08AA5C190BB62C00892284 /* GTAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GTAlertView.m; sourceTree = "<group>"; };
+		7B08AA61190BF02900892284 /* BlurBackground.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlurBackground.m; sourceTree = "<group>"; };
+		7B08AA62190BF02900892284 /* BlurBackground.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlurBackground.h; sourceTree = "<group>"; };
+		7B21D72D190C27B6004079CB /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		7B21D72F190C27F5004079CB /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		B5422F091705EB6200CF13D7 /* BlockTableAlertView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BlockTableAlertView.h; sourceTree = "<group>"; };
 		B5422F0A1705EB6200CF13D7 /* BlockTableAlertView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BlockTableAlertView.m; sourceTree = "<group>"; };
 		B583D76F175E3C31002A35C0 /* alert-green-button.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "alert-green-button.png"; sourceTree = "<group>"; };
@@ -123,6 +130,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7B21D730190C27F5004079CB /* QuartzCore.framework in Frameworks */,
+				7B21D72E190C27B6004079CB /* Accelerate.framework in Frameworks */,
 				EC90169F14BB629F00EF52E1 /* UIKit.framework in Frameworks */,
 				EC9016A114BB629F00EF52E1 /* Foundation.framework in Frameworks */,
 				EC9016A314BB629F00EF52E1 /* CoreGraphics.framework in Frameworks */,
@@ -132,6 +141,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		7B08AA5A190BB62C00892284 /* GTAlert */ = {
+			isa = PBXGroup;
+			children = (
+				7B08AA62190BF02900892284 /* BlurBackground.h */,
+				7B08AA61190BF02900892284 /* BlurBackground.m */,
+				7B08AA5B190BB62C00892284 /* GTAlertView.h */,
+				7B08AA5C190BB62C00892284 /* GTAlertView.m */,
+			);
+			path = GTAlert;
+			sourceTree = "<group>";
+		};
 		EC90168F14BB629F00EF52E1 = {
 			isa = PBXGroup;
 			children = (
@@ -153,6 +173,8 @@
 		EC90169D14BB629F00EF52E1 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7B21D72F190C27F5004079CB /* QuartzCore.framework */,
+				7B21D72D190C27B6004079CB /* Accelerate.framework */,
 				EC90169E14BB629F00EF52E1 /* UIKit.framework */,
 				EC9016A014BB629F00EF52E1 /* Foundation.framework */,
 				EC9016A214BB629F00EF52E1 /* CoreGraphics.framework */,
@@ -263,8 +285,7 @@
 				B5422F0A1705EB6200CF13D7 /* BlockTableAlertView.m */,
 				ECFC5EF814EB1DA4004BFD45 /* BlockAlertView.h */,
 				ECFC5EF914EB1DA4004BFD45 /* BlockAlertView.m */,
-				7BE2686C190B1A090084AC19 /* GTAlertView.h */,
-				7BE2686D190B1A090084AC19 /* GTAlertView.m */,
+				7B08AA5A190BB62C00892284 /* GTAlert */,
 			);
 			path = ToAddToYourProjects;
 			sourceTree = "<group>";
@@ -367,10 +388,11 @@
 			files = (
 				EC9016AB14BB629F00EF52E1 /* main.m in Sources */,
 				EC9016AF14BB629F00EF52E1 /* BlockAlertsDemoAppDelegate.m in Sources */,
-				7BE2686E190B1A090084AC19 /* GTAlertView.m in Sources */,
+				7B08AA5D190BB62C00892284 /* GTAlertView.m in Sources */,
 				EC9016B214BB629F00EF52E1 /* BlockAlertsDemoViewController.m in Sources */,
 				ECFC5EFE14EB1DA4004BFD45 /* BlockActionSheet.m in Sources */,
 				ECFC5EFF14EB1DA4004BFD45 /* BlockAlertView.m in Sources */,
+				7B08AA63190BF02900892284 /* BlurBackground.m in Sources */,
 				ECFC5F0014EB1DA4004BFD45 /* BlockBackground.m in Sources */,
 				ECFC5F0114EB1DA4004BFD45 /* BlockTextPromptAlertView.m in Sources */,
 				B5422F0B1705EB6200CF13D7 /* BlockTableAlertView.m in Sources */,

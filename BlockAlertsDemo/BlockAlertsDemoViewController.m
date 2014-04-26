@@ -8,6 +8,7 @@
 
 #import "BlockAlertsDemoViewController.h"
 #import "BlockAlertView.h"
+#import "GTAlertView.h"
 #import "BlockActionSheet.h"
 #import "BlockTextPromptAlertView.h"
 #import "BlockTableAlertView.h"
